@@ -15,8 +15,11 @@
 	<h1>Filialen</h1>
 	
 	<c:forEach items='${filialen}' var='filiaal'>
-		
-		<h2>${filiaal.naam}</h2>
+	
+		<c:url var="filiaalURL" value="/filialen">
+			<c:param name="id" value="${filiaal.id}" />
+		</c:url>	
+		<h2><a href="${filiaalURL}">${filiaal.naam}</a></h2>
 		<p>${filiaal.adres.straat} ${filiaal.adres.huisNr}<br>
 		${filiaal.adres.postcode} ${filiaal.adres.gemeente.toUpperCase()}</p>
 	</c:forEach>
