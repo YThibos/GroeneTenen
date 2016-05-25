@@ -1,12 +1,16 @@
 package be.vdab.valueobjects;
 
+import javax.validation.constraints.NotNull;
+
+import be.vdab.constraints.PostcodeOld;
+import be.vdab.constraints.PostcodeReeksVanKleinerDanTot;
+
+@PostcodeReeksVanKleinerDanTot
 public class PostcodeReeks {
 
-	private static final int MIN_POSTCODE = 1000;
-	private static final int MAX_POSTCODE = 9999;
-	
-	
+	@NotNull @PostcodeOld 
 	private Integer vanpostcode;
+	@NotNull @PostcodeOld 
 	private Integer totpostcode;
 	
 	public PostcodeReeks() {}
@@ -20,12 +24,12 @@ public class PostcodeReeks {
 	}
 
 	public void setVanpostcode(Integer vanpostcode) {
-		valideerPostcode(vanpostcode);
+		// obsolete: valideerPostcode(vanpostcode);
 		this.vanpostcode = vanpostcode;
 	}
 
 	public void setTotpostcode(Integer totpostcode) {
-		valideerPostcode(totpostcode);
+		// obsolete: valideerPostcode(totpostcode);
 		this.totpostcode = totpostcode;
 	}
 	
@@ -33,10 +37,11 @@ public class PostcodeReeks {
 		return postcode >= vanpostcode && postcode <= totpostcode;
 	}
 	
-	private void valideerPostcode(int postcode) throws IllegalArgumentException {
-		if (postcode < MIN_POSTCODE || postcode > MAX_POSTCODE) {
-			throw new IllegalArgumentException();
-		}
-	}
+	// overbodig door validation annotations
+//	private void valideerPostcode(int postcode) throws IllegalArgumentException {
+//		if (postcode < MIN_POSTCODE || postcode > MAX_POSTCODE) {
+//			throw new IllegalArgumentException();
+//		}
+//	}
 	
 }

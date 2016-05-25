@@ -1,10 +1,15 @@
 package be.vdab.web;
 
+import javax.validation.ValidatorFactory;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.validation.Validator;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -30,6 +35,17 @@ public class ControllersConfig extends WebMvcConfigurerAdapter {
 		return resolver;
 	}
 	
+	@Bean
+	LocalValidatorFactoryBean validatorfactory() {
+		LocalValidatorFactoryBean factory = new LocalValidatorFactoryBean();
+		factory.setValidationMessageSource(messageSource());
+		return factory;
+	}
+	
+	@Override
+	public Validator getValidator() {
+		return new SpringValidatorAdapter(validatorfactory().getValidator());
+	}
 	
 	// LOCALE
 	@Bean
@@ -51,6 +67,8 @@ public class ControllersConfig extends WebMvcConfigurerAdapter {
 		registry.addInterceptor(new LocaleChangeInterceptor());
 	}
 	
+	
+	// RESOURCES
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/images/**").addResourceLocations("/images/");
@@ -58,6 +76,8 @@ public class ControllersConfig extends WebMvcConfigurerAdapter {
 		registry.addResourceHandler("/scripts/**").addResourceLocations("/scripts/");
 	}
 	
+	
+	// EXTRA
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/info").setViewName("info");

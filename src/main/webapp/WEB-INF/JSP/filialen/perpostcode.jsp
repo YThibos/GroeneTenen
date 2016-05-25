@@ -21,9 +21,9 @@
 	
 	<sform:form action="${url}" commandName="postcodeReeks" method="get">
 		<sform:label path="vanpostcode">Van:<sform:errors path="vanpostcode"/></sform:label>	
-		<sform:input path="vanpostcode" autofocus="autofocus"/>	
+		<sform:input path="vanpostcode" autofocus="autofocus" type="number" required="required" min="1000" max="9999"/>	
 		<sform:label path="totpostcode">Tot:<sform:errors path="totpostcode"/></sform:label>	
-		<sform:input path="totpostcode"/>
+		<sform:input path="totpostcode" type="number" required="required" min="1000" max="9999"/>
 		<input type="submit" value="Zoeken">	
 		<sform:errors cssClass="fout" />
 	</sform:form>

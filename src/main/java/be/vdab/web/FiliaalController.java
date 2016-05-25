@@ -3,6 +3,8 @@ package be.vdab.web;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -51,11 +53,11 @@ class FiliaalController {
 		this.filiaalService = filiaalService;
 	}
 	
-	// INITBINDER
-	@InitBinder("postcodeReeks")
-	void initBinderPostcodeReeks(DataBinder dataBinder) {
-		dataBinder.setRequiredFields("vanpostcode", "totpostcode");
-	}
+	// INITBINDER VERVANGEN DOOR BEAN VALIDATION
+//	@InitBinder("postcodeReeks")
+//	void initBinderPostcodeReeks(DataBinder dataBinder) {
+//		dataBinder.setRequiredFields("vanpostcode", "totpostcode");
+//	}
 	
 	// REQUEST HANDLING METHODS
 	@RequestMapping(method = RequestMethod.GET)
@@ -124,7 +126,7 @@ class FiliaalController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, params = {"vanpostcode", "totpostcode"})
-	ModelAndView findByPostcodeReeks(PostcodeReeks reeks, BindingResult bindingResult) {
+	ModelAndView findByPostcodeReeks(@Valid PostcodeReeks reeks, BindingResult bindingResult) {
 		ModelAndView mav = new ModelAndView(PER_POSTCODE_VIEW);
 		if (!bindingResult.hasErrors()) {
 			List<Filiaal> filialen = filiaalService.findByPostcodeReeks(reeks);
