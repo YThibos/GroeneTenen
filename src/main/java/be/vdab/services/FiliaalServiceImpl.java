@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import be.vdab.entities.Filiaal;
 import be.vdab.exceptions.FiliaalNietLeegException;
 import be.vdab.repositories.FiliaalRepository;
+import be.vdab.valueobjects.PostcodeReeks;
 
 @Service
 class FiliaalServiceImpl implements FiliaalService {
@@ -50,5 +51,11 @@ class FiliaalServiceImpl implements FiliaalService {
 	@Override
 	public long findAantalFilialen() {
 		return filiaalRepository.findAantalFilialen();
+	}
+
+	@Override
+	public List<Filiaal> findByPostcodeReeks(PostcodeReeks reeks) {
+		return filiaalRepository.findByPostcodeReeks(reeks);
+		
 	}
 }

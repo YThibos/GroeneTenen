@@ -3,6 +3,7 @@ package be.vdab.repositories;
 import java.util.List;
 
 import be.vdab.entities.Filiaal;
+import be.vdab.valueobjects.PostcodeReeks;
 
 public interface FiliaalRepository {
 
@@ -13,5 +14,6 @@ public interface FiliaalRepository {
 	List<Filiaal> findAll();
 	long findAantalFilialen();
 	long findAantalWerknemers(long id);
+	List<Filiaal> findByPostcodeReeks(PostcodeReeks reeks);
 	
 }
