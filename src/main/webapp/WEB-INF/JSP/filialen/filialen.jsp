@@ -13,7 +13,7 @@
 <body>
 	<v:menu/>
 
-	<h1>Filialen</h1>
+	<h1><spring:message code="aantalFilialen" arguments="${aantalFilialen}" /></h1>
 	
 	<c:forEach items='${filialen}' var='filiaal'>
 	
