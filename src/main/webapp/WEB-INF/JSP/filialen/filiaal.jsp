@@ -42,12 +42,16 @@
 			<spring:url value="/filialen/{id}/verwijderen" var="verwijderURL">
 				<spring:param name="id" value="${filiaal.id}" />
 			</spring:url>
-			
 			<form action="${verwijderURL}" method="post">
 				<input type="submit" value="Verwijderen" />				
 			</form>
 			
-			
+			<spring:url value='/filialen/{id}/wijzigen' var='wijzigURL'>
+				<spring:param name='id' value='${filiaal.id}'/>
+			</spring:url>
+			<form action='${wijzigURL}'>
+				<input type='submit' value='Wijzigen'>
+			</form>	
 		
 		</c:when>
 		<c:otherwise>

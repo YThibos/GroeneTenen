@@ -1,7 +1,6 @@
 package be.vdab.web;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.validation.Valid;
 
@@ -31,12 +30,14 @@ class FiliaalController {
 	private static final String FILIAALDETAIL_VIEW = "filialen/filiaal";
 	private static final String VERWIJDERD_VIEW = "filialen/verwijderd";
 	private static final String PER_POSTCODE_VIEW = "filialen/perpostcode";
+	private static final String WIJZIGEN_VIEW = "filialen/wijzigen";
 	
 	// REDIRECT PATHS
 	private static final String REDIRECT_URL_NA_TOEVOEGEN = "redirect:/filialen";
 	private static final String REDIRECT_URL_FILIAAL_NIET_GEVONDEN = "redirect:/filialen";
 	private static final String REDIRECT_URL_NA_VERWIJDEREN = "redirect:/filialen/{id}/verwijderd";
 	private static final String REDIRECT_URL_HEEFT_NOG_WERKNEMERS = "redirect:/filialen/{id}";
+	private static final String REDIRECT_URL_NA_WIJZIGEN = "redirect:/filialen";
 	
 	// OTHERS
 	private final FiliaalService filiaalService;
@@ -94,6 +95,25 @@ class FiliaalController {
 		}
 		filiaalService.create(filiaal);
 		return REDIRECT_URL_NA_TOEVOEGEN;
+	}
+	
+	//--------------FILIAAL WIJZIGEN-------------------
+	@RequestMapping(path = "{id}/wijzigen", method = RequestMethod.GET)
+	ModelAndView updateForm(@PathVariable long id) {
+		Filiaal filiaal = filiaalService.read(id);
+		if (filiaal == null) {
+			return new ModelAndView(REDIRECT_URL_FILIAAL_NIET_GEVONDEN);
+		}
+		return new ModelAndView(WIJZIGEN_VIEW).addObject(filiaal);
+	}
+	
+	@RequestMapping(path = "{id}/wijzigen", method = RequestMethod.POST)
+	String update(@Valid Filiaal filiaal, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return WIJZIGEN_VIEW;
+		}
+		filiaalService.update(filiaal);
+		return REDIRECT_URL_NA_WIJZIGEN;
 	}
 	
 	//-------------------FILIAAL LEZEN OP ID----------------
