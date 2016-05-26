@@ -46,6 +46,8 @@
 			<form action="${verwijderURL}" method="post">
 				<input type="submit" value="Verwijderen" />				
 			</form>
+			
+			
 		
 		</c:when>
 		<c:otherwise>

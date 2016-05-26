@@ -23,15 +23,15 @@ public class PostcodeReeks {
 		return totpostcode;
 	}
 
-	public void setVanpostcode(Integer vanpostcode) {
-		// obsolete: valideerPostcode(vanpostcode);
-		this.vanpostcode = vanpostcode;
-	}
-
-	public void setTotpostcode(Integer totpostcode) {
-		// obsolete: valideerPostcode(totpostcode);
-		this.totpostcode = totpostcode;
-	}
+//	public void setVanpostcode(Integer vanpostcode) {
+//		// obsolete: valideerPostcode(vanpostcode);
+//		this.vanpostcode = vanpostcode;
+//	}
+//
+//	public void setTotpostcode(Integer totpostcode) {
+//		// obsolete: valideerPostcode(totpostcode);
+//		this.totpostcode = totpostcode;
+//	}
 	
 	public boolean bevat(Integer postcode) {
 		return postcode >= vanpostcode && postcode <= totpostcode;
