@@ -91,6 +91,20 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>[5.1,]</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- VALIDATOR -->
+		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>[5.2.3, 5.2.99]</version>
@@ -103,6 +117,7 @@
 			<version>[1.8,]</version>
 		</dependency>
 		
+		<!--  SPRING JDBC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
