@@ -3,14 +3,15 @@ package be.vdab.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import be.vdab.entities.Filiaal;
 import be.vdab.exceptions.FiliaalNietLeegException;
 import be.vdab.repositories.FiliaalRepository;
 import be.vdab.valueobjects.PostcodeReeks;
 
-@Service
+@EnableTransactionManagement
+@ReadOnlyTransactionalService
 class FiliaalServiceImpl implements FiliaalService {
 	
 	private final FiliaalRepository filiaalRepository;
@@ -21,6 +22,7 @@ class FiliaalServiceImpl implements FiliaalService {
 	}
 
 	@Override
+	@ModifyingTransactionalServiceMethod
 	public void create(Filiaal filiaal) {
 		filiaalRepository.create(filiaal);
 	}
@@ -31,11 +33,13 @@ class FiliaalServiceImpl implements FiliaalService {
 	}
 
 	@Override
+	@ModifyingTransactionalServiceMethod
 	public void update(Filiaal filiaal) {
 		filiaalRepository.update(filiaal);
 	}
 
 	@Override
+	@ModifyingTransactionalServiceMethod
 	public void delete(long id) throws FiliaalNietLeegException {
 		if (filiaalRepository.findAantalWerknemers(id) != 0) {
 			throw new FiliaalNietLeegException("Filiaal heeft nog werknemers. Deze moeten eerst verwijderd worden bij delete.");
