@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
@@ -18,11 +25,15 @@ import org.springframework.format.annotation.NumberFormat.Style;
 
 import be.vdab.valueobjects.Adres;
 
+@Entity
+@Table(name = "filialen")
 public class Filiaal implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	// MEMBER VARIABLES
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	@NotBlank
 	@Length(min = 1, max = 50)
@@ -35,7 +46,7 @@ public class Filiaal implements Serializable {
 	@Digits(integer = 10, fraction = 2)
 	private BigDecimal waardeGebouw;
 	@NotNull
-	@DateTimeFormat(pattern = "dd-MM-yyyy") 
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate inGebruikName;
 	@Valid
 	private Adres adres;
