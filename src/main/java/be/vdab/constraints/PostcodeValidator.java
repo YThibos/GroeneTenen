@@ -2,7 +2,6 @@ package be.vdab.constraints;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import javax.validation.constraints.Min;
 
 public class PostcodeValidator implements ConstraintValidator<PostcodeOld, Integer>{
 
