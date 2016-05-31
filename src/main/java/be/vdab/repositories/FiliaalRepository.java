@@ -13,7 +13,6 @@ public interface FiliaalRepository {
 	void delete(long id);
 	List<Filiaal> findAll();
 	long findAantalFilialen();
-	long findAantalWerknemers(long id);
 	List<Filiaal> findByPostcodeReeks(PostcodeReeks reeks);
 	
 }

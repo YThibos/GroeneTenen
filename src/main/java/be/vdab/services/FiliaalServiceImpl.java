@@ -41,8 +41,11 @@ class FiliaalServiceImpl implements FiliaalService {
 	@Override
 	@ModifyingTransactionalServiceMethod
 	public void delete(long id) throws FiliaalNietLeegException {
-		if (filiaalRepository.findAantalWerknemers(id) != 0) {
-			throw new FiliaalNietLeegException("Filiaal heeft nog werknemers. Deze moeten eerst verwijderd worden bij delete.");
+		Filiaal filiaal = filiaalRepository.read(id);
+		if (filiaal != null) {
+			if (!filiaal.getWerknemers().isEmpty()) {
+				throw new FiliaalNietLeegException("Filiaal heeft nog werknemers. Deze moeten eerst verwijderd worden bij delete.");
+			}
 		}
 		filiaalRepository.delete(id);
 	}

@@ -27,7 +27,7 @@ public class FiliaalRepositoryImplTest {
 	
 	@Test
 	public void create() {
-		Filiaal filiaal = new Filiaal("Testnaam", true, BigDecimal.ONE, LocalDate.now(), new Adres("straat", "huisnr", 0, "gemeente"));
+		Filiaal filiaal = new Filiaal("Testnaam", true, BigDecimal.ONE, LocalDate.now(), new Adres("straat", "huisnr", 1000, "gemeente"));
 		filiaalRepository.create(filiaal);
 		
 		// ID wordt ingevuld na het aanmaken in de database

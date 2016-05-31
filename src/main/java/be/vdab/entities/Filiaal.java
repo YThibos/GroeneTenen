@@ -3,14 +3,15 @@ package be.vdab.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Set;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
@@ -49,8 +50,11 @@ public class Filiaal implements Serializable {
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate inGebruikName;
 	@Valid
+	@Embedded
 	private Adres adres;
-
+	@OneToMany(mappedBy = "filiaal")
+	private Set<Werknemer> werknemers;
+	
 	
 	// CONSTRUCTORS
 	public Filiaal() {}
@@ -89,7 +93,10 @@ public class Filiaal implements Serializable {
 	public Adres getAdres() {
 		return adres;
 	}
-
+	public Set<Werknemer> getWerknemers() {
+		return werknemers;
+	}
+	
 	// SETTERS
 	public void setId(long id) {
 		this.id = id;
