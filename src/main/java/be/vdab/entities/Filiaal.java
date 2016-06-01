@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
@@ -36,22 +39,33 @@ public class Filiaal implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@Version
+	private long versie;
+	
 	@NotBlank
 	@Length(min = 1, max = 50)
 	@SafeHtml
 	private String naam;
+	
 	private boolean hoofdFiliaal;
+	
 	@NumberFormat(style=Style.NUMBER) 
 	@Min(0)
 	@NotNull
 	@Digits(integer = 10, fraction = 2)
 	private BigDecimal waardeGebouw;
+	
 	@NotNull
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@Column
+	@Convert(converter = SqlDateLocalDateConverter.class)
 	private LocalDate inGebruikName;
+	
 	@Valid
 	@Embedded
 	private Adres adres;
+	
 	@OneToMany(mappedBy = "filiaal")
 	private Set<Werknemer> werknemers;
 	

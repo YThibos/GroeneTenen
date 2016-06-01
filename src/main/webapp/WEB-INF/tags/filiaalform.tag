@@ -31,6 +31,8 @@
 	<form:label path='waardeGebouw'>Waarde gebouw:
 	<form:errors path='waardeGebouw' delimiter=', '/></form:label>
 	<form:input path='waardeGebouw' required='required'/>
+	
+	<form:hidden path='versie'/>
 
 	<div class='rij'><form:checkbox path='hoofdFiliaal' label='Hoofdfiliaal'/></div>
 	<input type='submit' value='${knopTekst}' id='submitknop'>

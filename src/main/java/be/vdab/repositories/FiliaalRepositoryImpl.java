@@ -1,25 +1,13 @@
 package be.vdab.repositories;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.IncorrectResultSizeDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import be.vdab.entities.Filiaal;
-import be.vdab.valueobjects.Adres;
 import be.vdab.valueobjects.PostcodeReeks;
 
 @Repository
@@ -60,7 +48,7 @@ public class FiliaalRepositoryImpl implements FiliaalRepository {
 
 	@Override
 	public long findAantalFilialen() {
-		return entityManager.createNamedQuery("Filiaal.Aantal", Number.class)
+		return entityManager.createNamedQuery("Filiaal.findAantal", Number.class)
 				.getSingleResult().longValue();
 	}
 

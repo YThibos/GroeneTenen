@@ -1,5 +1,6 @@
 package be.vdab.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Entity;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "werknemers")
-public class Werknemer {
+public class Werknemer implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 

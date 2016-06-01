@@ -1,5 +1,6 @@
 package be.vdab.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 
 import be.vdab.enums.Gazontype;
 
-public class Offerte {
+public class Offerte implements Serializable {
 
 	
 	// VALIDATION GROUPS
