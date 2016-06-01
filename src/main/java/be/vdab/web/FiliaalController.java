@@ -172,6 +172,8 @@ class FiliaalController {
 		ModelAndView mav = new ModelAndView(PER_POSTCODE_VIEW);
 		
 		PostcodeReeks reeks = new PostcodeReeks();
+		reeks.setTotpostcode(9999);
+		reeks.setVanpostcode(1000);
 		mav.addObject(reeks);
 		
 		return mav;
