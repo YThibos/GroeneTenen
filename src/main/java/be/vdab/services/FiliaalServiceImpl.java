@@ -24,24 +24,24 @@ class FiliaalServiceImpl implements FiliaalService {
 	@Override
 	@ModifyingTransactionalServiceMethod
 	public void create(Filiaal filiaal) {
-		filiaalRepository.create(filiaal);
+		filiaalRepository.save(filiaal);
 	}
 
 	@Override
 	public Filiaal read(long id) {
-		return filiaalRepository.read(id);
+		return filiaalRepository.findOne(id);
 	}
 
 	@Override
 	@ModifyingTransactionalServiceMethod
 	public void update(Filiaal filiaal) {
-		filiaalRepository.update(filiaal);
+		filiaalRepository.save(filiaal);
 	}
 
 	@Override
 	@ModifyingTransactionalServiceMethod
 	public void delete(long id) throws FiliaalNietLeegException {
-		Filiaal filiaal = filiaalRepository.read(id);
+		Filiaal filiaal = filiaalRepository.findOne(id);
 		if (filiaal != null) {
 			if (!filiaal.getWerknemers().isEmpty()) {
 				throw new FiliaalNietLeegException("Filiaal heeft nog werknemers. Deze moeten eerst verwijderd worden bij delete.");
@@ -57,12 +57,12 @@ class FiliaalServiceImpl implements FiliaalService {
 
 	@Override
 	public long findAantalFilialen() {
-		return filiaalRepository.findAantalFilialen();
+		return filiaalRepository.count();
 	}
 
 	@Override
 	public List<Filiaal> findByPostcodeReeks(PostcodeReeks reeks) {
-		return filiaalRepository.findByPostcodeReeks(reeks);
+		return filiaalRepository.findByAdresPostcodeBetweenOrderByNaam(reeks.getVanpostcode(), reeks.getTotpostcode());
 		
 	}
 }
