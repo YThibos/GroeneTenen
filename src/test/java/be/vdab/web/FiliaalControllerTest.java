@@ -48,17 +48,17 @@ public class FiliaalControllerTest {
 	
 	@Test
 	public void read_activeert_juiste_view() {
-		assertEquals("filialen/filiaal", filiaalController.read(1L).getViewName());
+		assertEquals("filialen/filiaal", filiaalController.read(filiaal).getViewName());
 	}
 	
 	@Test
 	public void read_met_bestaande_id_geeft_filiaal_terug() {
-		assertSame(filiaal, filiaalController.read(1L).getModelMap().get("filiaal"));
+		assertSame(filiaal, filiaalController.read(filiaal).getModelMap().get("filiaal"));
 	}
 	
-	@Test
-	public void read_met_onbestaande_id_geeft_null_terug() {
-		assertNull(filiaalController.read(-1L).getModelMap().get("filiaal"));
-	}
+//	@Test
+//	public void read_met_onbestaande_id_geeft_null_terug() {
+//		assertNull(filiaalController.read(-1L).getModelMap().get("filiaal"));
+//	}
 
 }
