@@ -14,11 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.entities.Filiaal;
 import be.vdab.repositories.FiliaalRepository;
-import be.vdab.repositories.RepositoriesConfig;
+import be.vdab.repositories.TestRepositoriesConfig;
 import be.vdab.valueobjects.Adres;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes= {TestDataSourceConfig.class, RepositoriesConfig.class})
+@ContextConfiguration(classes= {TestDataSourceConfig.class, TestRepositoriesConfig.class})
 @Transactional
 public class FiliaalRepositoryImplTest {
 	
