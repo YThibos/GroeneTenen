@@ -32,6 +32,7 @@ class FiliaalController {
 	private static final String VERWIJDERD_VIEW = "filialen/verwijderd";
 	private static final String PER_POSTCODE_VIEW = "filialen/perpostcode";
 	private static final String WIJZIGEN_VIEW = "filialen/wijzigen";
+	private static final String AFSCHRIJVEN_VIEW = "filialen/afschrijven";
 	
 	// REDIRECT PATHS
 	private static final String REDIRECT_URL_NA_TOEVOEGEN = "redirect:/filialen";
@@ -41,6 +42,7 @@ class FiliaalController {
 	private static final String REDIRECT_URL_NA_WIJZIGEN = "redirect:/filialen";
 	private static final String REDIRECT_URL_NA_LOCKING_EXCEPTION =
 			"redirect:/filialen/{id}?optimisticlockingexception=true";
+	private static final String REDIRECT_NA_AFSCHRIJVEN = "redirect:/";
 	
 	// OTHERS
 	private final FiliaalService filiaalService;
@@ -190,6 +192,23 @@ class FiliaalController {
 			}
 		}
 		return mav;
+	}
+	
+	
+	//--------------------AFSCHRIJVEN--------------------------------
+	@RequestMapping(path = "afschrijven", method = RequestMethod.GET)
+	ModelAndView afschrijvenForm() {
+		return new ModelAndView(AFSCHRIJVEN_VIEW, "filialen",
+			filiaalService.findNietAfgeschreven()).addObject(new AfschrijvenForm());
+	}
+	
+	@RequestMapping(path="afschrijven", method = RequestMethod.POST)
+	ModelAndView afschrijven(@Valid AfschrijvenForm afschrijvenForm, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return new ModelAndView(AFSCHRIJVEN_VIEW, "filialen", filiaalService.findNietAfgeschreven());
+		}
+		filiaalService.afschrijven(afschrijvenForm.getFilialen());
+		return new ModelAndView(REDIRECT_NA_AFSCHRIJVEN);
 	}
 	
 }

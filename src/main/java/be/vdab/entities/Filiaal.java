@@ -130,6 +130,12 @@ public class Filiaal implements Serializable {
 	public void setAdres(Adres adres) {
 		this.adres = adres;
 	}
+	
+	
+	// OPERATIONS
+	public void afschrijven() {
+		this.waardeGebouw = BigDecimal.ZERO;
+	}
 
 	
 	// OVERRIDDEN OBJECT METHODS
