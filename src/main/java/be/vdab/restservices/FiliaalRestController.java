@@ -50,6 +50,11 @@ class FiliaalRestController {
 		filiaalService.create(filiaal);
 	}
 	
+	@RequestMapping(method = RequestMethod.PUT, path = "{id}")
+	void update(@RequestBody @Valid Filiaal filiaal) {
+		filiaalService.update(filiaal);
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	String filiaalMetVerkeerdeProperties(MethodArgumentNotValidException ex) {
