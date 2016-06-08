@@ -34,6 +34,7 @@ class FiliaalController {
 	private static final String PER_POSTCODE_VIEW = "filialen/perpostcode";
 	private static final String WIJZIGEN_VIEW = "filialen/wijzigen";
 	private static final String AFSCHRIJVEN_VIEW = "filialen/afschrijven";
+	private static final String PER_ID_VIEW = "filialen/perid";
 	
 	// REDIRECT PATHS
 	private static final String REDIRECT_URL_NA_TOEVOEGEN = "redirect:/filialen";
@@ -85,7 +86,6 @@ class FiliaalController {
 		return new ModelAndView(FILIALEN_VIEW, "filialen", filiaalService.findAll())
 				.addObject("aantalFilialen", filiaalService.findAantalFilialen());
 	}
-
 	
 	//--------------FILIAAL TOEVOEGEN------------------- 
 	
@@ -136,6 +136,11 @@ class FiliaalController {
 			modelAndView.addObject(filiaal);
 		}
 		return modelAndView;
+	}
+	
+	@RequestMapping(path = "perid", method = RequestMethod.GET)
+	String findById() {
+		return PER_ID_VIEW;
 	}
 	
 	//-------------------FILIAAL VERWIJDEREN-----------------------
