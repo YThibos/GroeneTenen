@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -33,11 +34,13 @@ import org.springframework.format.annotation.NumberFormat.Style;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import be.vdab.restservices.LocalDateAdapter;
 import be.vdab.valueobjects.Adres;
 
 @Entity
 @Table(name = "filialen")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Filiaal implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -67,6 +70,7 @@ public class Filiaal implements Serializable {
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	@Column
 	@Convert(converter = SqlDateLocalDateConverter.class)
+	@XmlJavaTypeAdapter(LocalDateAdapter.class)
 	private LocalDate inGebruikName;
 	
 	@Valid

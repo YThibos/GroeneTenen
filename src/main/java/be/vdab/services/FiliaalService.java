@@ -3,7 +3,6 @@ package be.vdab.services;
 import java.util.List;
 
 import be.vdab.entities.Filiaal;
-import be.vdab.exceptions.FiliaalNietGevondenException;
 import be.vdab.exceptions.FiliaalNietLeegException;
 import be.vdab.valueobjects.PostcodeReeks;
 

@@ -1,6 +1,7 @@
 package be.vdab.web;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -32,5 +33,10 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 	protected Filter[] getServletFilters() {
 		return new Filter[] { new CharacterEncodingFilter("UTF-8"), new OpenEntityManagerInViewFilter() };
 	}
-
+	
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		registration.setInitParameter("dispatchOptionsRequest", "true");
+	}
+	
 }

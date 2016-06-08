@@ -1,8 +1,13 @@
 package be.vdab.restservices;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -29,22 +34,6 @@ class FiliaalRestController {
 		this.filiaalService = filiaalService;
 	}
 	
-	@RequestMapping(path = "{filiaal}", method = RequestMethod.GET)
-	Filiaal read(@PathVariable Filiaal filiaal) {
-		if (filiaal == null) {
-			throw new FiliaalNietGevondenException();
-		}
-		return filiaal;
-	}
-	
-	@RequestMapping(path = "{filiaal}", method = RequestMethod.DELETE)
-	void delete(@PathVariable Filiaal filiaal) {
-		if (filiaal == null) {
-			throw new FiliaalNietGevondenException();
-		}
-		filiaalService.delete(filiaal.getId());
-	}
-	
 	@RequestMapping(method = RequestMethod.POST)
 	void create(@RequestBody @Valid Filiaal filiaal) {
 		filiaalService.create(filiaal);
@@ -54,6 +43,47 @@ class FiliaalRestController {
 	void update(@RequestBody @Valid Filiaal filiaal) {
 		filiaalService.update(filiaal);
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, path = "{filiaal}")
+	Filiaal read(@PathVariable Filiaal filiaal) {
+		if (filiaal == null) {
+			throw new FiliaalNietGevondenException();
+		}
+		return filiaal;
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, path = "{filiaal}")
+	void delete(@PathVariable Filiaal filiaal) {
+		if (filiaal == null) {
+			throw new FiliaalNietGevondenException();
+		}
+		filiaalService.delete(filiaal.getId());
+	}
+
+	@RequestMapping(method = RequestMethod.OPTIONS, path = "{filiaal}")
+	HttpHeaders options(@PathVariable Filiaal filiaal) {
+		
+		if (filiaal == null) {
+			throw new FiliaalNietGevondenException();
+		}
+		
+		Set<HttpMethod> allowedMethods = new HashSet<>();
+		allowedMethods.add(HttpMethod.GET);
+		allowedMethods.add(HttpMethod.PUT);
+		
+		if (filiaal.getWerknemers().isEmpty()) {
+			allowedMethods.add(HttpMethod.DELETE);
+		}
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAllow(allowedMethods);
+		
+		return headers;
+		
+	}
+
+
+	//-----------------EXCEPTION HANDLERS--------------------------------
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
