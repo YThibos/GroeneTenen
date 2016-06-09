@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Service
-@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+@Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 public @interface ReadOnlyTransactionalService {
 	
 }
